@@ -119,8 +119,7 @@ const updateBody = z.object({
 });
 
 const update = async (req, res) => {
-  console.log("User ID from token:", req.userId);
-  console.log("Request Body:", req.body);
+
 
   // Validate input
   const result = updateBody.safeParse(req.body);
@@ -178,7 +177,7 @@ const bulk = async (req, res) => {
 const del = async (req, res) => {
   const { name, password, email } = req.body;
   try {
-    const user = await User.create({ name, password, email });
+    const user = await User.delete({ name, password, email });
     res.status(201).json(user);
   } catch (e) {
     res.status(400).json({ message: e.message });
